@@ -1,10 +1,13 @@
-INSTRUCCIONES
+# INSTRUCCIONES
 
----------------------------- COMO GENERAR LAS LLAVES VAPID -------------------------
+### COMO GENERAR LAS LLAVES VAPID 
 
 Se debe tener instalado nodejs en el sistema operativo y ejecutar los siguientes comandos:
->npm install -g web-push
->web-push generate-vapid-keys
+
+`>npm install -g web-push`
+
+`>web-push generate-vapid-keys`
+
 
 
 Public Key:
