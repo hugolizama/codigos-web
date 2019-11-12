@@ -8,13 +8,13 @@ Se debe tener instalado nodejs en el sistema operativo y ejecutar los siguientes
 
 `>web-push generate-vapid-keys`
 
+<br/>
 
-Public Key:
-
+Public Key:<br/>
 BJ-RnDbqhXzPxLWp1aEZk43hL4kreRg9XYrSsBzWS0OZ5qzEhI3GbGrjcr0AE2YJbKOUW_7ry2rhfA8vRGh1j
+<br/>
 
-Private Key:
-
+Private Key:<br/>
 YO9CUkXpIPCA1OdKwMDiEjC26OW5Y6oUkRNcLw-s0
 
 <br/><br/>
@@ -48,24 +48,24 @@ Ej:
 #------------- PRUEBAS PARA HACER WEB PUSH EN PHP -------------
 listen 8081
 <VirtualHost 127.0.0.103:80 192.168.23.1:8081 >
-	DocumentRoot "C:\www\apache\htdocs\pruebas\push-notification\backend"
+    DocumentRoot "C:\www\apache\htdocs\pruebas\push-notification\backend"
     ServerName 127.0.0.103
-	ServerAlias webpush.local
+    ServerAlias webpush.local
     ErrorLog "logs/webpush-error.log"
     CustomLog "logs/webpush-access.log" combined	
 	
-	#php 7.2
-	FcgidWrapper "c:/www/php72/php-cgi.exe" .php 
-	AddHandler fcgid-script .php	
+    #php 7.2
+    FcgidWrapper "c:/www/php72/php-cgi.exe" .php 
+    AddHandler fcgid-script .php	
 		
     <Directory "C:\www\apache\htdocs\pruebas\push-notification\backend"> 
-		<FilesMatch "\.php$">
-			SetHandler fcgid-script 
-		</FilesMatch> 
-		Options Indexes Includes FollowSymLinks SymLinksifOwnerMatch ExecCGI MultiViews
-		AllowOverride All
-		Require all granted	
-	</Directory>
+	<FilesMatch "\.php$">
+		SetHandler fcgid-script 
+	</FilesMatch> 
+	Options Indexes Includes FollowSymLinks SymLinksifOwnerMatch ExecCGI MultiViews
+	AllowOverride All
+	Require all granted	
+    </Directory>
 	
     <Directory "c:/www/php72/">
       <Files "php-cgi.exe">		
