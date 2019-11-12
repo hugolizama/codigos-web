@@ -9,38 +9,37 @@ Se debe tener instalado nodejs en el sistema operativo y ejecutar los siguientes
 `>web-push generate-vapid-keys`
 
 
-
 Public Key:
-BJ-RnDbqhXzPxLWp1aEZk43hL4kreRg9XYrSsBzWS0OZ5qzEhI3GbGrjcr0AE2YJbKOUW_7ry2rhfA8vRGh1jVg
+
+BJ-RnDbqhXzPxLWp1aEZk43hL4kreRg9XYrSsBzWS0OZ5qzEhI3GbGrjcr0AE2YJbKOUW_7ry2rhfA8vRGh1j
 
 Private Key:
-YO9CUkXpIPCA1OdKwMDiEjC26OW5Y6oUkRNcLw-s0Tw
+
+YO9CUkXpIPCA1OdKwMDiEjC26OW5Y6oUkRNcLw-s0
 
 
-
-
------------------ DESCARGAR LIBRERÍA PARA ENVIAR LAS NOTIFICACIONES PUSH ----------------------------
+### DESCARGAR LIBRERÍA PARA ENVIAR LAS NOTIFICACIONES PUSH
 
 https://github.com/web-push-libs/web-push-php
 
-NOTA: Para descargar la última versión de la librería es necesario PHP 7+, de lo contrario composer descargara una versión anterior.
+**NOTA:** Para descargar la última versión de la librería es necesario PHP 7+, de lo contrario composer descargara una versión anterior.
+
 
 Crear una carpeta "backend", navegar por consola hasta esta carpeta y ejecutar el siguiente comando:
->composer require minishlink/web-push
+
+`>composer require minishlink/web-push`
 
 
-
---------------- ERROR "SSL certificate problem: unable to get local issuer certificate" ----------------
+### ERROR "SSL certificate problem: unable to get local issuer certificate" 
 
 Las notificaciones push necesitan de un certificado de seguridad en el servidor, para efectos de PRUEBAS y DESARROLLO en el proyecto se incluye un certificado. Se debe editar el archivo php.ini y buscar la opción "curl.cainfo" y agregar la ruta hasta el archivo "cacert.pem".
 
 Ej:
-curl.cainfo = C:\www\apache\htdocs\push-notification\backend\cacert.pem 
+
+> curl.cainfo = C:\www\apache\htdocs\push-notification\backend\cacert.pem 
 
 
-
-
--------------------- CREAR UN HOST VIRTUAL PARA LAS NOTIFICACIONES ----------------------------------
+### CREAR UN HOST VIRTUAL PARA LAS NOTIFICACIONES
 
 #------------- PRUEBAS PARA HACER WEB PUSH EN PHP -------------
 listen 8081
@@ -72,27 +71,24 @@ listen 8081
 </VirtualHost>
 
 
-
-
-
--------------- HABILITAR GOOGLE CHROME PARA SITIOS INSEGUROS ---------------------------------
+### HABILITAR GOOGLE CHROME PARA SITIOS INSEGUROS 
 
 Las notificaciones push solo funcionan obligatoriamente con sitios con certificados de seguridad SSL (https) por lo que si ocupamos un dominio que no sea "localhost" o "127.0.0.1" para nuestras pruebas, por ejemplo armando una red local donde podamos incluir dispositivos móviles, no funcionará. 
 
 Google Chrome permite anular esta restricción, primero en la barra de navegación de chrome digitar esta url:
->chrome://flags/#unsafely-treat-insecure-origin-as-secure
+> chrome://flags/#unsafely-treat-insecure-origin-as-secure
 
 En la caja de texto digitar la ip o dominio que deseamos permitir. Ej: http://192.168.23.1, luego a la par de la caja de texto seleccionar la opción "Enable" y abajo del navegador hacer click en el botón "Relaunch" que hará reiniciar el navegador, de esta forma ya podremos utilizar del dominio o ip para pruebas.
 
-NOTA: Esta misma instrucción habría que ser introducida en el navegador chrome de teléfonos si deseamos hacer pruebas con dispositivos móviles.
+**NOTA:** Esta misma instrucción habría que ser introducida en el navegador chrome de teléfonos si deseamos hacer pruebas con dispositivos móviles.
 
 
 
------------------------ PRUEBAS DE FUNCIONAMIENTO ------------------------------------
+### PRUEBAS DE FUNCIONAMIENTO 
 Navegadores:
-- Chrome desktop - funciona
-- Chrome mobile - funciona
-- Firefox desktop - funciona
-- Firefox mobile -                 PENDIENTE
-- Opera desktop - funciona
-- navegador samsung -              PENDIENTE
+- Chrome desktop - Funciona
+- Chrome mobile - Funciona
+- Firefox desktop - Funciona
+- Firefox mobile - **PENDIENTE**
+- Opera desktop - Funciona
+- navegador samsung - **PENDIENTE**
