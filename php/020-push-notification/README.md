@@ -17,6 +17,7 @@ Private Key:
 
 YO9CUkXpIPCA1OdKwMDiEjC26OW5Y6oUkRNcLw-s0
 
+<br/><br/>
 
 ### DESCARGAR LIBRERÍA PARA ENVIAR LAS NOTIFICACIONES PUSH
 
@@ -29,6 +30,7 @@ Crear una carpeta "backend", navegar por consola hasta esta carpeta y ejecutar e
 
 `>composer require minishlink/web-push`
 
+<br/><br/>
 
 ### ERROR "SSL certificate problem: unable to get local issuer certificate" 
 
@@ -38,9 +40,11 @@ Ej:
 
 > curl.cainfo = C:\www\apache\htdocs\push-notification\backend\cacert.pem 
 
+<br/><br/>
 
 ### CREAR UN HOST VIRTUAL PARA LAS NOTIFICACIONES
 
+```
 #------------- PRUEBAS PARA HACER WEB PUSH EN PHP -------------
 listen 8081
 <VirtualHost 127.0.0.103:80 192.168.23.1:8081 >
@@ -69,7 +73,9 @@ listen 8081
       </Files>
     </Directory>
 </VirtualHost>
+```
 
+<br/><br/>
 
 ### HABILITAR GOOGLE CHROME PARA SITIOS INSEGUROS 
 
@@ -82,7 +88,7 @@ En la caja de texto digitar la ip o dominio que deseamos permitir. Ej: http://19
 
 **NOTA:** Esta misma instrucción habría que ser introducida en el navegador chrome de teléfonos si deseamos hacer pruebas con dispositivos móviles.
 
-
+<br/><br/>
 
 ### PRUEBAS DE FUNCIONAMIENTO 
 Navegadores:
