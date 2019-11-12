@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <script src="shortcut.js"></script>
+    <script type="text/javascript">
+      shortcut.add("F2", function () {
+        alert("Tecla F2");
+      }, {
+        "type": "keydown",
+        "propagate": true,
+        "target": document
+      });
+
+      shortcut.add("Ctrl+G", function () {
+        alert("Combinación de teclas Ctrl+G");
+      }, {
+        "type": "keydown",
+        "propagate": true,
+        "target": document
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Detectar combinaci&oacute;n de teclas</h1>
+    <p>Presiona F2 o Ctrl+G</p>
+  </body>
+</html>

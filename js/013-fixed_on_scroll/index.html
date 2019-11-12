@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+      #contenedor{
+        border: 1px solid green; 
+        width: 400px; 
+        margin: 0px auto 0px auto;        
+      }
+      
+      .espaciador{
+        height: 300px;
+      }
+      
+      .fondo-azul{
+        background-color: lightskyblue;
+      }
+      
+      /*css basico para el menu*/
+      #menu{
+        text-align: center;        
+        padding: 5px 0px;
+        transition: all .5s;  
+      }
+      
+      #menu.fixed{
+        position: fixed;
+        top: 0px;        
+        z-index: 100;   
+        background-color: #DDD;
+        transition: all .5s; 
+        /*con left: 0 el menu inicia desde el borde izquierdo,
+        asi tomara el ancho de todo el navegador.
+        Si utilizas la siguiente opcion tambien debes poner como ancho 100%*/
+        /*left: 0;         
+        width: 100%;*/
+      }
+      /*fin css basico para menu*/
+    </style>
+  </head>
+  <body>     
+    <div id="contenedor">
+      <div class="espaciador"></div>   
+      <!-- menu fixed -->
+      <div id="menu">
+        <button>Boton 1</button> <button>Boton 2</button>
+      </div>
+      <!-- fin menu fixed -->
+      <div class="espaciador"></div>    
+      <div class="espaciador fondo-azul"></div>    
+      <div class="espaciador"></div>    
+      <div class="espaciador fondo-azul"></div>    
+      <div class="espaciador"></div>    
+      <div class="espaciador fondo-azul"></div> 
+      <div class="espaciador"></div>    
+      <div class="espaciador fondo-azul"></div> 
+    </div>
+    
+    <script src="../jquery-1.11.2.min.js"></script>
+    <script>
+      $(document).ready(function(){ 
+        //toma la posicion inicial del menu
+        var posicionMenu = $('#menu').offset().top;
+        
+        //funcion que se dispara al desplazar la hoja
+        $(window).on('scroll', function() {
+          //cuando el scroll sobrepase la posicion del menu se vuelve fixed
+          if ($(window).scrollTop() > posicionMenu) {
+            $('#menu').addClass('fixed'); //agregamos clase fixed al menu
+            //comentar la siguiente opcion si se utiliza left
+            $('#menu').width($('#contenedor').width()); //toma el ancho del contenedor
+          } else {
+            $('#menu').removeClass('fixed'); //quitamos la clase al menu
+            //comentar la siguiente opcion si se utiliza left
+            $('#menu').width(''); //remover el ancho del contenedor
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

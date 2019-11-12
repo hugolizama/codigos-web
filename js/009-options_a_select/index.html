@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Agregar <options> de un select a otro con JQuery</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <h1>Agregar &lt;options&gt; de un select a otro con JQuery</h1>
+    
+    <div style="margin-top: 10px; margin-bottom: 10px;">
+      Hacer doble clic sobre una opcion para agregarla
+    </div>
+    
+    <div style="display: inline-block; margin-right: 20px;">
+      Etiquetas disponibles<br/>
+      <select id="opciones_disponibles" size="10" style="width: 200px;">
+        <option value="1">Opcion 1</option>
+        <option value="2">Opcion 2</option>
+        <option value="3">Opcion 3</option>
+        <option value="4">Opcion 4</option>
+        <option value="5">Opcion 5</option>
+        <option value="6">Opcion 6</option>
+        <option value="7">Opcion 7</option>
+        <option value="8">Opcion 8</option>
+        <option value="9">Opcion 9</option>
+        <option value="10">Opcion 10</option>
+      </select>
+    </div>
+    
+    <div style="display: inline-block;">
+      Etiquetas agregadas<br/>
+      <select id="opciones_agregadas" size="10" style="width: 200px;">       
+        
+      </select>
+    </div>
+    
+    <script src="../jquery-1.11.2.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        //agregar opciones
+        $('#opciones_disponibles option').dblclick(function(){
+          var valor = $(this).val(); //valor de la opcion
+          var texto = $(this).text(); //texto de la opcion
+
+          //verificar si la opcion no esta agregada antes de agregarla
+          if ( $('#opciones_agregadas option[value="' + valor + '"]').length === 0 ){
+            //agregar la opcion
+            $('#opciones_agregadas').append($('<option>', {
+              value: valor,
+              text: texto
+            }));
+          }      
+        });
+        
+        //remover opciones
+        $(document).on('dblclick', '#opciones_agregadas option',function(){
+          var valor = $(this).val(); //valor de la opcion
+          
+          //eliminar la opcion con valor X
+          $('#opciones_agregadas option[value="' + valor + '"]').remove();  
+        });
+
+      });
+    </script>
+    
+  </body>
+</html>

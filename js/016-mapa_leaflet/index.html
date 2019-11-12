@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+     <link rel="stylesheet" href="css/leaflet.css"/>     
+     <style>
+       #mapid { 
+         height: 500px; 
+         border: 1px solid black;
+       }
+     </style>
+  </head>
+  <body>
+    <div id="mapid"></div>	  
+	<script src="js/leaflet.js"></script>
+
+    <script>
+      var lat = 13.7288136;
+      var lng = -89.2195887;
+      
+      
+      var arrayMarcadores = [
+        [
+          '01 - ELECTRAMA',
+          13.7292341,
+          -89.2174566,
+          123,
+          'Direccion del centro de votacion 1'
+        ],
+        [
+          '02 - IGLESIA EL PARAISO',
+          13.7295467,
+          -89.2221808,
+          456,
+          'Direccion del centro de votacion 2'
+        ],
+        [
+          '03 - TEXACO',
+          13.7296509,
+          -89.2198205,
+          789,
+          'Direccion del centro de votacion 3'
+        ],
+        [
+          '04 - Parque montebello',
+          13.728379,
+          -89.218531,
+          963,
+          'Direccion del parque montebello'
+        ]
+      ];
+      
+      
+      var mymap = L.map('mapid').setView([lat, lng], 17);
+      
+      var tile = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	  
+      L.tileLayer(tile, {
+        attribution: 'halm &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        maxZoom: 25
+      }).addTo(mymap);
+    
+    
+      function setMarkers(locations) {  
+        
+        var myIcon = L.icon({
+          iconUrl: './images/marker2_2.png',
+          iconSize: [50, 50],
+          iconAnchor: [25, 50],
+          popupAnchor: [0, -50]
+        });
+        
+        
+        for (var i = 0; i < locations.length; i++) {          
+          var place = locations[i];          
+          var marker = L.marker([place[1], place[2]], {
+            icon: myIcon,
+            id: place[3]
+          }).addTo(mymap);        
+          
+          marker.bindPopup("<b>" + place[0] + "</b><br>" + place[4]);
+          
+          marker.on('mouseover', function (e) {
+            this.openPopup();
+          });
+          
+          marker.on('mouseout', function (e) {
+            this.closePopup();
+          });
+          
+          marker.on('dblclick', function (e) {            
+            alert('Id seleccionado: ' + this.options.id);
+          });
+        }
+      }
+      
+      setMarkers(arrayMarcadores);
+      
+    </script>	
+  </body>
+</html>

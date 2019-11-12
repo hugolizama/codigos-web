@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IMPRIMIR CONTENIDO DE IFRAME CON JQUERY - KIUVOX</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Libreria JQuery -->
+    <script type="text/javascript" src="../jquery-1.11.2.min.js"></script>
+    
+    <script>
+      $(document).ready(function(){
+        //detectamos el click en el boton de imprimir
+        $('#btnImprimir').click(function(){
+          //Hacemos foco en el iframe
+          $('#frame').get(0).contentWindow.focus(); 
+          //Ejecutamos la impresion sobre ese control
+          $("#frame").get(0).contentWindow.print(); 
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>IMPRIMIR CONTENIDO DE IFRAME CON JQUERY - KIUVOX</h1>
+    <!-- iframe con un contenido de pdf -->
+    <iframe id='frame' src='kiuvox.pdf' style="height: 300px; width: 600px;"></iframe>
+    <div></div>
+    <button type="button" id='btnImprimir'>Click para imprimir</button>
+  </body>
+</html>

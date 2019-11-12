@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Como mostrar todas las infowindow al cargar mapa de Google Maps</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      #map{
+        width: 800px; 
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Como mostrar todas las infowindow al cargar mapa de Google Maps</h1>
+    <div id="map"></div><!-- mapa -->
+    
+    <script>     
+      //puntos a ser marcados en el mapa
+      var puntos = [        
+        ['Santa Ana', 13.9837933, -89.5628214, 'info adicional 1'], 
+        ['San Salvador', 13.6914782, -89.2146939, 'info adicional 2'], 
+        ['San Miguel', 13.531445, -88.2719195, 'info adicional 3']
+      ];
+
+      //funcion para posicionar los marcadores en el mapa
+      function setMarkers(map, puntos) {  
+        //recorremos cada uno de los puntos
+        for (var i = 0; i < puntos.length; i++) {
+          var place = puntos[i];
+
+          //propiedades del marcador
+          var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(place[1], place[2]), //posicion
+              map: map,
+              animation: google.maps.Animation.DROP, //animacion           
+              nombre: place[0], //personalizado - nombre del punto
+              info: place[3] //personalizado - informacion adicional
+          });
+
+          //limpiamos el contenido del globo de informacion
+          var infowindow = new google.maps.InfoWindow({
+              content: ''
+          });
+
+          //contenido de la infowindow
+          var content='<div id="content" style="width: auto; height: 60px;">' + marker.nombre + '<hr/>' + marker.info + '</div>';                    
+
+          /*medoto para crear las infowindow independiente una de otra y 
+           * desplegarlas todas a la vez*/
+          google.maps.event.addListener(marker, 'click', function(marker, content, infowindow) {
+             return function(){
+                infowindow.setContent(content); //asignar el contenido al globo
+                infowindow.open(map, marker); //mostrarlo
+             };            
+          }(marker,content,infowindow));
+          infowindow.open(map, marker);
+
+          /*metodo para desplegar la infowindow cuando se haga clic en el marcador*/
+          google.maps.event.addListener(marker, 'click', function(marker, content, infowindow) {             
+            infowindow.setContent(content); //asignar el contenido al globo
+            infowindow.open(map, marker); //mostrarlo                      
+          }(marker, content, infowindow));
+
+        }
+
+      }
+
+      //funcion para inicializar el mapa
+      function initialize() {
+        //iniciamos un nuevo mapa el div 'map' y le asignamos propiedades
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: new google.maps.LatLng(13.802994, -88.9053364), //coordenada inicial
+          zoom: 8, //nivel de zoom
+          mapTypeId: google.maps.MapTypeId.ROADMAP //tipo de mapa      
+        }); 
+
+        //llamar a la funcion que escribe los marcadores
+        setMarkers(map, puntos);
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initialize" async defer></script>
+  </body>
+</html>

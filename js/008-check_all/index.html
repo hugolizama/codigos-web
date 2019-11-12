@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Marcar todos los checkbox de una lista</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Libreria JQuery -->
+    <script src="../jquery-1.11.2.min.js"></script>
+    
+    <script>
+      $(document).ready(function () {  
+        //Detectar click en el checkbox superior de la lista
+        $('#selectall').on('click', function () {
+          //verificar el estado de ese checkbox si esta marcado o no
+          var checked_status = this.checked;
+
+          /*
+           * asignarle ese estatus a cada uno de los checkbox
+           * que tengan la clase "selectall"
+          */
+          $(".selectall").each(function () {
+            this.checked = checked_status;
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Marcar todos los checkbox de una lista</h1>
+    
+    <!-- Tabla con items de ejemplo -->
+    <table style="border: 1px solid black; padding: 5px;">
+      <thead>
+        <tr>        
+          <th style="width: 15px;"><input id="selectall" type="checkbox"></th>          
+          <th>Marcar todos</th>        
+        </tr>
+      </thead>
+      <tbody>
+        <tr>     
+          <td><input value="1" class="selectall" type="checkbox"></td>          
+          <td>Item 1</td>          	
+        </tr>
+        
+        <tr>     
+          <td><input value="2" class="selectall" type="checkbox"></td>          
+          <td>Item 2</td>          	
+        </tr>
+        
+        <tr>     
+          <td><input value="3" class="selectall" type="checkbox"></td>          
+          <td>Item 3</td>          	
+        </tr>
+        
+        <tr>     
+          <td><input value="4" class="selectall" type="checkbox"></td>          
+          <td>Item 4</td>          	
+        </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>
