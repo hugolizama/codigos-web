@@ -16,10 +16,11 @@
 	<script src="js/leaflet.js"></script>
 
     <script>
+      /* unicacion inicial del mapa*/
       var lat = 13.7288136;
       var lng = -89.2195887;
       
-      
+      /* arreglo de prueba de marcadores */
       var arrayMarcadores = [
         [
           '01 - ELECTRAMA',
@@ -51,19 +52,21 @@
         ]
       ];
       
-      
+      /* inicializar mapa */
       var mymap = L.map('mapid').setView([lat, lng], 17);
       
-      var tile = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-	  
+      /* agregar capa al mapa */
+      var tile = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';	  
       L.tileLayer(tile, {
         attribution: 'halm &copy; <a href="https://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
         maxZoom: 25
       }).addTo(mymap);
     
     
-      function setMarkers(locations) {  
+      /* funcion para agregar los marcadores al mapa */
+      function setMarkers(arrayMarcadores) { 
         
+        /* establecer propiedades para el icono de los marcadores */
         var myIcon = L.icon({
           iconUrl: './images/marker2_2.png',
           iconSize: [50, 50],
@@ -71,24 +74,35 @@
           popupAnchor: [0, -50]
         });
         
-        
-        for (var i = 0; i < locations.length; i++) {          
-          var place = locations[i];          
-          var marker = L.marker([place[1], place[2]], {
+        /* recorrer todos los items del arreglo de marcadores */
+        for (var i = 0; i < arrayMarcadores.length; i++) {          
+          var propMarcador = arrayMarcadores[i]; /* asignar los valores a una variable */     
+          
+          /* establecer valores del nuevo marcador */
+          var marker = L.marker([propMarcador[1], propMarcador[2]], {
             icon: myIcon,
-            id: place[3]
+            id: propMarcador[3]
           }).addTo(mymap);        
           
-          marker.bindPopup("<b>" + place[0] + "</b><br>" + place[4]);
+          /* Establecer una ventana de informacion al marcador */
+          marker.bindPopup("<b>" + propMarcador[0] + "</b><br>" + propMarcador[4]);
           
+          /* evento al hacer clic en el marcador */
+          marker.on('click', function (e) {
+            this.openPopup();
+          });
+          
+          /* evento al pasar el mouse encima */
           marker.on('mouseover', function (e) {
             this.openPopup();
           });
           
+          /* eento al salir del objeto con el mouse */
           marker.on('mouseout', function (e) {
             this.closePopup();
           });
           
+          /* evento al hacer doble clic en el marcador */
           marker.on('dblclick', function (e) {            
             alert('Id seleccionado: ' + this.options.id);
           });
